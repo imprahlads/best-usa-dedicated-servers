@@ -202,6 +202,95 @@ SaaS platforms and APIs, eCommerce stores, CDN origin servers, high-traffic data
 - Skipping a backup plan. Check whether backups are included before you rely on them.
 - Forgetting the control panel license. cPanel, Plesk and Windows Server are often paid add-ons.
 
+## How Much CPU, RAM and Storage Do You Need?
+
+There is no single right size, but these starting points (general guidance, not provider rules) help you avoid paying for hardware you will not use.
+
+| Workload | CPU focus | RAM starting point | Storage focus |
+|---|---|---|---|
+| Single busy website or store | 4 to 8 fast cores | 32 GB | NVMe or SSD |
+| Several client sites (reseller style) | 8 to 16 cores | 64 GB | SSD or NVMe, RAID-1 |
+| Database server (MySQL, PostgreSQL) | High clock speed, 8 to 16 cores | 64 to 128 GB | NVMe, RAID-1 or RAID-10 |
+| Virtualization or containers | 24 or more cores (EPYC, dual Xeon) | 128 GB or more | NVMe, mirrored |
+| Game server | Highest single-core clock (Ryzen) | 32 to 64 GB | NVMe |
+| Backup or media storage | Modest | 32 to 64 GB | Large SATA drives |
+
+Two rules save money. First, size RAM for your database and cache, because RAM shortage causes slowdowns faster than CPU shortage. Second, choose mirrored drives (RAID-1) for anything you cannot rebuild easily, since a single failed disk should not take your data with it.
+
+## Port Speed and Monthly Traffic: Simple Math
+
+"Unmetered" means the provider does not charge by the gigabyte. It does not mean the port is infinite. Your port speed sets the ceiling.
+
+A 1 Gbps port moves about 125 MB per second at full speed. If it ran at 100% for a whole 30-day month, it could carry roughly 324 TB. A 300 Mbit/s port tops out near 97 TB under the same assumption, and a 10 Gbps port near 3,240 TB. Real traffic never runs flat out, so a 1 Gbps port is more than enough for most websites, stores and APIs.
+
+Check two things before you order: whether the unmetered plan has a fair-use rule (Bluehost, for example, states a resource-use limit on its page), and whether the port speed you see is the speed on the plan you are buying. On several providers the entry plan has a slower port than the plans above it.
+
+## Managed vs Self-Managed Dedicated Servers
+
+A **self-managed** server gives you the hardware and a working OS. You handle updates, security patches, firewall rules, backups and monitoring. It costs less and suits teams with a Linux or Windows administrator.
+
+A **managed** server adds a provider team that handles part or all of that work. The scope differs by provider, so read the fine print.
+
+- **YouStable:** semi-managed by default, with fully managed support as an add-on.
+- **UltaHost:** states managed service at no additional cost.
+- **InMotion Hosting:** includes managed plans with cPanel and priority support.
+- **Bluehost:** includes cPanel and WHM, with 24/7 support.
+- **InterServer:** the dedicated page does not describe managed service.
+
+If you do not have an administrator, a missed security patch is the most common cause of trouble. In that case, managed support is worth the extra cost.
+
+## Which US Location Should You Pick?
+
+Latency depends on distance, so place the server near most of your users.
+
+- **New York, Ashburn and Washington D.C. (East Coast):** best for visitors in the eastern US, Canada and Europe-bound routes. Offered by YouStable (New York), UltaHost (New York), InterServer (NYC), Bluehost (Ashburn) and InMotion Hosting (Washington D.C.).
+- **Miami and Tampa (Florida):** useful for Latin America and Caribbean traffic. YouStable lists both.
+- **Dallas and Irving (Texas):** a central position that balances East and West Coast latency. YouStable, UltaHost and InterServer list Dallas, and YouStable also lists Irving.
+- **Los Angeles, San Francisco, Seattle and Phoenix (West):** best for the western US and Asia-Pacific routes. Los Angeles is offered by YouStable, UltaHost, InterServer and InMotion Hosting. Seattle is offered by UltaHost and Phoenix by Bluehost.
+- **Chicago:** a Midwest option listed by UltaHost.
+
+If your audience is spread across the country, Dallas is a safe middle choice. If you serve a global audience, put the dedicated server in the US as your origin and add a CDN in front of it.
+
+## Security Checklist After Your Server Goes Live
+
+A new server is exposed to the internet within minutes. Work through this list on day one.
+
+1. Update the operating system and all packages.
+2. Create a non-root admin user and use SSH keys instead of passwords.
+3. Disable root login over SSH, or at least restrict it by IP.
+4. Turn on a firewall and open only the ports you need.
+5. Install fail2ban or an equivalent tool to block repeated login attempts.
+6. Enable automatic security updates for the OS where it fits your workflow.
+7. Set up off-server backups and test a restore at least once.
+8. Add monitoring and alerts for CPU, disk, memory and uptime.
+9. Keep IPMI or KVM access private and protected with strong credentials.
+10. Review your DDoS options. Several providers here include network-level protection, but the capacity is not always published.
+
+## Questions to Ask Before You Order
+
+- Is the price shown for a monthly, 12-month, 24-month or 36-month term?
+- What is the renewal price, and when does it start?
+- Is there a setup fee, and is it refundable?
+- What is the refund window, and what is excluded from it?
+- What does the uptime SLA pay back if it is missed?
+- How fast is hardware replaced after a failure?
+- Is the port speed the same on every plan?
+- Which control panel is included, and which licenses cost extra?
+- Can I upgrade RAM or storage later without moving to a new server?
+- How long does deployment take (minutes, hours, or days)?
+
+## Quick Picks by Use Case
+
+| If you want | Look at |
+|---|---|
+| A flat monthly price with no renewal hike | YouStable |
+| The lowest entry price with managed service | UltaHost |
+| A stocked server in NYC, Dallas or Los Angeles | InterServer |
+| cPanel and WHM with a 30-day refund window | Bluehost |
+| Managed hosting with fast hardware replacement | InMotion Hosting |
+| Many CPU cores for virtualization | YouStable (EPYC plans) or UltaHost (EPYC plans) |
+| High clock speed for games or single-thread apps | YouStable (Ryzen plans) or UltaHost (Ryzen plans) |
+
 ## FAQs
 
 ### What is the cheapest dedicated server in the USA?
